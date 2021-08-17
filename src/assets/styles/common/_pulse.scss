@@ -1,0 +1,17 @@
+.pulse {
+  animation: 2.5s ease infinite pulse;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  
+  25% {
+    transform: scale(1.015);
+  }
+  
+  50% {
+    transform: scale(1);
+  }
+}
