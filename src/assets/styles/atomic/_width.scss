@@ -1,0 +1,5 @@
+@each $key, $value in $widths {
+  .w-#{$key} {
+    width: $value;
+  }
+}

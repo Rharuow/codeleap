@@ -1,0 +1,30 @@
+.fs-1 {
+  font-size: $h1-font-size;
+}
+
+.fs-2 {
+  font-size: $h2-font-size;
+}
+
+.fs-3 {
+  font-size: $h3-font-size;
+}
+
+.fs-4 {
+  font-size: $h4-font-size;
+}
+
+.fs-5 {
+  font-size: $h5-font-size;
+}
+
+.fs-6 {
+  font-size: $h6-font-size;
+}
+
+
+@each $fs, $value in $custom-sizes {
+  .fs-#{$fs} {
+    font-size: $value;
+  }
+}
