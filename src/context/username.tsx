@@ -16,8 +16,6 @@ const UsernameContext = createContext({} as IUsernameContext)
 const UsernameProvider: React.FC = ({ children }) => {
   const [username, setUsername] = useState('')
 
-  console.log('children = ', children)
-
   return (
     <UsernameContext.Provider value={{ username, setUsername }}>
       {children}

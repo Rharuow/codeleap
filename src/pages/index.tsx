@@ -8,6 +8,7 @@ import * as yup from 'yup'
 import { useUsername } from '../context/username'
 
 import codeleapLogo from '../assets/images/codeleap_logo_black 1.svg'
+import { useRouter } from 'next/dist/client/router'
 
 const schema = yup.object().shape({
   username: yup.string().required('username is required')
@@ -23,9 +24,14 @@ const Home: NextPage = () => {
   const [disabled, setDisabled] = useState(true)
   const { username, setUsername } = useUsername()
 
+  const router = useRouter()
+
   const { handleSubmit, register } = useForm<IFormInput>()
 
-  const onSubmit: SubmitHandler<IFormInput> = data => console.log(data)
+  const onSubmit: SubmitHandler<IFormInput> = data => {
+    setUsername(data.username)
+    router.push("/main")
+  }
 
   useEffect(() => {
     schema.isValid({ username }).then(valid => {
