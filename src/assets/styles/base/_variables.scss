@@ -60,6 +60,13 @@ $font-weight-semibold: 500;
 $font-weight-bold: 600;
 $font-weight-bolder: 900;
 
+$text-colors: (
+  black: $black,
+  gray: #777,
+  ligth-gray: $border-color,
+  white: $white,
+);
+
 $font-weights: (
   100: 100,
   200: 200,
@@ -94,7 +101,15 @@ $custom-sizes: (
   8px: 8px,
   9px: 9px,
   10px: 10px,
+  11px: 11px,
+  12px: 12px,
+  13px: 13px,
+  14px: 14px,
   15px: 15px,
+  16px: 16px,
+  17px: 17px,
+  18px: 18px,
+  19px: 19px,
   20px: 20px,
   22px: 22px,
   25px: 25px,
@@ -145,6 +160,7 @@ $custom-sizes: (
 
 $widths: (
   100px: 100px,
+  111px: 111px,
   200px: 200px,
   300px: 300px,
   400px: 400px,

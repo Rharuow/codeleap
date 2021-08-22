@@ -1,0 +1,5 @@
+@each $key, $value in $text-colors {
+    .text-#{$key} {
+        color: $value
+    }
+}
