@@ -22,8 +22,8 @@ interface IPost {
 }
 
 interface IFormInput {
-    title: string
-    content: string
+    post_title: string
+    post_content: string
 }
 
 const schema = yup.object().shape({
@@ -38,8 +38,8 @@ const Post: React.FC<{post: IPost, setPosts: React.Dispatch<React.SetStateAction
     const [showEdit, setShowEdit] = useState(false)
     const [showDelete, setShowDelete] = useState(false)
     const [showError, setShowError] = useState<boolean>(false)
-    const [title, setTitle] = useState(post.title) 
-    const [content, setContent] = useState(post.content) 
+    const [title, setTitle] = useState<string>() 
+    const [content, setContent] = useState<string>() 
     const [disabled, setDisabled] = useState<boolean>()
     const [error, setError] = useState({title: '', content: ''})
 
@@ -69,16 +69,20 @@ const Post: React.FC<{post: IPost, setPosts: React.Dispatch<React.SetStateAction
                 post.username === username && 
                 <div className="d-flex justify-content-end h-30px">
                     <div className="me-30px ">
-                        <Image src={trash} className="mh" layout="fixed" width={17.5} height={22.5} onClick={() => {
-                            setShowEdit(false)
-                            setShowDelete(true)
-                            handleShow()
-                        }} />
+                      <Image src={trash} className="mh" layout="fixed" width={17.5} height={22.5} onClick={() => {
+                        setShowEdit(false)
+                        setShowDelete(true)
+                        handleShow()
+                      }} />
                     </div>
                     <Image src={edit} layout="fixed" className="mh" onClick={() => {
-                        setShowEdit(true)
-                        setShowDelete(false)
-                        handleShow()
+                      setShowEdit(true)
+                      setShowDelete(false)
+                      console.log(title)
+                      console.log(post.content)
+                      setTitle(post.title)
+                      setContent(post.content)
+                      handleShow()
                     }} width={22.5} height={22.5} />
                 </div>
             }
@@ -98,8 +102,6 @@ const Post: React.FC<{post: IPost, setPosts: React.Dispatch<React.SetStateAction
     )
 
     const {register, handleSubmit} = useForm()
-
-    
 
     const onSubmit: SubmitHandler<IFormInput> = data => {
         api.patch(`/${post.id}/`, {
@@ -169,10 +171,9 @@ const Post: React.FC<{post: IPost, setPosts: React.Dispatch<React.SetStateAction
                             </label>
                             <input
                                 type="text"
-                                {...register('title')}
                                 value={title}
                                 onChange={e => {
-                                    setTitle(e.target.value)
+                                  setTitle(e.target.value)
                                 }}
                                 className="form-control form-control-sm"
                                 id="title"
@@ -194,17 +195,16 @@ const Post: React.FC<{post: IPost, setPosts: React.Dispatch<React.SetStateAction
                                 Content
                             </label>
                             <textarea 
-                            {...register('content')}
-                                onChange={e => {
-                                    setContent(e.target.value)
-                                }} 
-                                className="form-control"
-                                value={content}
-                                id="content" 
-                                name="content" 
-                                rows={3}
-                                placeholder="Content here" 
-                                style={{resize: 'none'}}/>
+                              value={content}
+                              onChange={e => {
+                                  setContent(e.target.value)
+                              }} 
+                              className="form-control"
+                              id="content" 
+                              name="content" 
+                              rows={3}
+                              placeholder="Content here" 
+                              style={{resize: 'none'}}/>
                             {showError && error.content != '' && (
                                 <small
                                 id="errorTitle"

@@ -19,20 +19,14 @@ const schema = yup.object().shape({
 
 const NewPost: React.FC<{
   username: string,
-  title: string,
-  content: string,
-  setTitle: React.Dispatch<React.SetStateAction<string>>,
-  setContent: React.Dispatch<React.SetStateAction<string>>,
   setPosts: React.Dispatch<React.SetStateAction<never[]>> 
 }> = ({
   username,
-  title,
-  content,
-  setTitle,
-  setContent,
   setPosts
 }) => {
 
+  const [title, setTitle] = useState<string>("")
+  const [content, setContent] = useState<string>("")
   const [showError, setShowError] = useState<boolean>(false)
   const [error, setError] = useState({title: '', content: ''})
   const [disabled, setDisabled] = useState<boolean>()
