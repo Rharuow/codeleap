@@ -28,6 +28,7 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@types/next-auth": "^3.15.0",
     "@types/react": "17.0.18",
     "@types/yup": "^0.29.13",
     "eslint": "7.32.0",
