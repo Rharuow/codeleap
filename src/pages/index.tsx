@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import type { NextPage } from 'next'
-import Image from 'next/image'
+import { getCsrfToken } from "next-auth/client";
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button } from 'react-bootstrap'
 import * as yup from 'yup'
+import { useRouter } from 'next/router'
 
 import { useUsername } from '../context/username'
+import Loading from '../components/Loading'
 
-import codeleapLogo from '../assets/images/codeleap_logo_black 1.svg'
-import { useRouter } from 'next/dist/client/router'
+import { nextAuth } from '../../service/api'
 
 const schema = yup.object().shape({
   username: yup.string().required('username is required')
@@ -28,9 +29,22 @@ const Home: NextPage = () => {
 
   const { handleSubmit, register } = useForm<IFormInput>()
 
-  const onSubmit: SubmitHandler<IFormInput> = data => {
+  const onSubmit: SubmitHandler<IFormInput> = async data => {
+    const csrfToken = await getCsrfToken();
+
     setUsername(data.username)
-    router.push("/main")
+    nextAuth.post("api/auth/callback/domain-username", {
+      ...data,
+      csrfToken,
+      callbackUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/main`,
+    })
+    .then((response) => {
+      setLoading(false);
+      router.push("/main");
+    })
+    .catch((error) => {
+      router.push("/main")
+    });
   }
 
   useEffect(() => {
@@ -55,16 +69,7 @@ const Home: NextPage = () => {
   return (
     <>
       {loading ? (
-        <div className="d-flex justify-content-center align-items-center vh-100">
-          <Image
-            width={607.5}
-            height={167}
-            className="pulse"
-            layout="fixed"
-            src={codeleapLogo}
-            alt="main logo codeleap"
-          />
-        </div>
+        <Loading />
       ) : (
         <div className="bg-secondary vh-100 w-100 d-flex justify-content-center align-items-center">
           <div className="card px-32px py-28px rounded-0 w-500px border">
