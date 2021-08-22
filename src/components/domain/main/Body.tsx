@@ -1,19 +1,37 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import NewPost from './post/New'
 
-import api from '../../../service/api'
+import { api } from '../../../../service/api'
 import { useUsername } from '../../../context/username'
-import List from './post/List'
+import Post from './post/Post'
 
+interface IPost {
+    id: number,
+    username: string,
+    created_datetime: Date,
+    title: string,
+    content: string
+}
 
-const Body = () => {
+const Body: React.FC<{posts: Array<IPost>, setPosts: React.Dispatch<React.SetStateAction<never[]>>}> = ({posts, setPosts}) => {
 
     const { username } = useUsername()
 
+    const [title, setTitle] = useState<string>("")
+    const [content, setContent] = useState<string>("")
+
+    useEffect(() => {
+        api.get("/").then(res => {
+            setPosts(res.data.results)
+        })
+    }, [])
+
     return (
         <div className="w-100 px-39px py-23px">
-            <NewPost username={username} />
-            <List />
+            <NewPost username={username} title={title} content={content} setTitle={setTitle} setContent={setContent} setPosts={setPosts} />
+            {
+                posts.map((post, index) => <Post key={index} post={post} setPosts={setPosts} />)
+            }
         </div>
     )
 }

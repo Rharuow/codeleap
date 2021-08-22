@@ -1,10 +1,13 @@
+import { getSession } from 'next-auth/client'
 import React, {
   createContext,
   useState,
   useContext,
   Dispatch,
-  SetStateAction
+  SetStateAction,
+  useEffect,
 } from 'react'
+import Loading from '../components/Loading'
 
 interface IUsernameContext {
   username: string
@@ -15,10 +18,18 @@ const UsernameContext = createContext({} as IUsernameContext)
 
 const UsernameProvider: React.FC = ({ children }) => {
   const [username, setUsername] = useState('')
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    getSession().then((session) => {
+      setUsername(`${session?.name}`)
+      setLoading(false)
+    })
+  }, [])
 
   return (
     <UsernameContext.Provider value={{ username, setUsername }}>
-      {children}
+      {loading ? <Loading /> : children}
     </UsernameContext.Provider>
   )
 }
