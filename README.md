@@ -1,34 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Introdution
 
-## Getting Started
+This is a simple comments platform. Using next-auth package, a session is create to allow the user make a CRUD on own comments.
 
-First, run the development server:
+# How can I run this project?
 
-```bash
-npm run dev
-# or
-yarn dev
+1. First, clone this repository
+
+```
+  git clone https://github.com/Rharuow/codeleap
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. After that, enter the folder and install dependencies using npm or yarn
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+   NPM case:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+   ```
+     cd codeleap && npm install
+   ```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+   or
 
-## Learn More
+   YARN case:
 
-To learn more about Next.js, take a look at the following resources:
+   ```
+     cd codeleap && yarn
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Copy and paste .env.example file as .env file and fill the environment variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```
+  cp .env.example .env
+```
 
-## Deploy on Vercel
+4. Finally, run the server with npm or yarn
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+NPM case:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+  npm run dev
+```
+
+YARN case:
+
+```
+  yarn dev
+```
+
+---
+
+# Obs
+
+You can see this project in production clicking [here](https://codeleap-rho.vercel.app/)
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
