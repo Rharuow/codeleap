@@ -6,31 +6,33 @@ import { useUsername } from '../../../context/username'
 import Post from './post/Post'
 
 interface IPost {
-    id: number,
-    username: string,
-    created_datetime: Date,
-    title: string,
-    content: string
+  id: number
+  username: string
+  created_datetime: Date
+  title: string
+  content: string
 }
 
-const Body: React.FC<{posts: Array<IPost>, setPosts: React.Dispatch<React.SetStateAction<never[]>>}> = ({posts, setPosts}) => {
+const Body: React.FC<{
+  posts: Array<IPost>
+  setPosts: React.Dispatch<React.SetStateAction<never[]>>
+}> = ({ posts, setPosts }) => {
+  const { username } = useUsername()
 
-    const { username } = useUsername()
+  useEffect(() => {
+    api.get('/').then(res => {
+      setPosts(res.data.results)
+    })
+  }, [])
 
-    useEffect(() => {
-        api.get("/").then(res => {
-            setPosts(res.data.results)
-        })
-    }, [])
-
-    return (
-        <div className="w-100 px-39px py-23px">
-            <NewPost username={username} setPosts={setPosts} />
-            {
-                posts.map((post, index) => <Post key={index} post={post} setPosts={setPosts} />)
-            }
-        </div>
-    )
+  return (
+    <div className="w-100 px-39px py-23px">
+      <NewPost username={username} setPosts={setPosts} />
+      {posts.map((post, index) => (
+        <Post key={index} post={post} setPosts={setPosts} />
+      ))}
+    </div>
+  )
 }
 
 export default Body

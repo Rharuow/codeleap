@@ -5,7 +5,7 @@ import React, {
   useContext,
   Dispatch,
   SetStateAction,
-  useEffect,
+  useEffect
 } from 'react'
 import Loading from '../components/Loading'
 
@@ -21,11 +21,13 @@ const UsernameProvider: React.FC = ({ children }) => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getSession().then((session) => {
-      setUsername(`${session?.name}`)
+    getSession().then(session => {
+      if (session && session.user) {
+        setUsername(`${session.user.name}`)
+      }
       setLoading(false)
     })
-  }, [])
+  }, [username])
 
   return (
     <UsernameContext.Provider value={{ username, setUsername }}>
@@ -36,6 +38,8 @@ const UsernameProvider: React.FC = ({ children }) => {
 
 export function useUsername() {
   const { username, setUsername } = useContext(UsernameContext)
+
+  console.log('username = ', username)
 
   return { username, setUsername }
 }
