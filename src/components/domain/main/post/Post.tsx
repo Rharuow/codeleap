@@ -92,8 +92,6 @@ const Post: React.FC<{
             onClick={() => {
               setShowEdit(true)
               setShowDelete(false)
-              console.log(title)
-              console.log(post.content)
               setTitle(post.title)
               setContent(post.content)
               handleShow()

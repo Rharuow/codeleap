@@ -39,8 +39,6 @@ const UsernameProvider: React.FC = ({ children }) => {
 export function useUsername() {
   const { username, setUsername } = useContext(UsernameContext)
 
-  console.log('username = ', username)
-
   return { username, setUsername }
 }
 
