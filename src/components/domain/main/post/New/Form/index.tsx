@@ -58,7 +58,7 @@ const NewPostForm: React.FC<{
   }
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <div className="form-group">
+      <div className="form-group mb-19px">
         <label htmlFor="title" className="fs-1rem mb-7px">
           Title
         </label>
@@ -73,7 +73,7 @@ const NewPostForm: React.FC<{
         />
       </div>
       <div className="form-group">
-        <label htmlFor="content" className="fs-1rem mb-13px">
+        <label htmlFor="content" className="fs-1rem mb-7px">
           Content
         </label>
         <textarea

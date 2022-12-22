@@ -118,7 +118,7 @@ const Post: React.FC<{
     </>
   )
 
-  const { register, handleSubmit } = useForm()
+  const { handleSubmit } = useForm()
 
   const onSubmit: SubmitHandler<IFormInput> = data => {
     api
@@ -166,8 +166,8 @@ const Post: React.FC<{
   }, [title, content])
 
   return (
-    <div className="w-100 border border-color-secondary mt-29px">
-      <Modal show={show} onHide={handleClose}>
+    <div className="modal-90w border border-color-secondary mt-29px">
+      <Modal show={show} onHide={handleClose} centered={!showDelete}>
         {showDelete ? (
           <Modal.Body className="pt-34px px-34px">
             Are you sure you want to delete this item?
@@ -196,7 +196,7 @@ const Post: React.FC<{
             <Modal.Body className=" px-34px">
               <Form onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-group">
-                  <label htmlFor="title" className="fs-1rem mb-13px">
+                  <label htmlFor="title" className="fs-1rem mb-7px">
                     Title
                   </label>
                   <input
@@ -205,7 +205,7 @@ const Post: React.FC<{
                     onChange={e => {
                       setTitle(e.target.value)
                     }}
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm mb-19px"
                     id="title"
                     name="title"
                     aria-describedby="title"
@@ -221,7 +221,7 @@ const Post: React.FC<{
                   )}
                 </div>
                 <div className="form-group">
-                  <label htmlFor="content" className="fs-1rem mb-13px">
+                  <label htmlFor="content" className="fs-1rem mb-7px">
                     Content
                   </label>
                   <textarea
