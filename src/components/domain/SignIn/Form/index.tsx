@@ -1,6 +1,6 @@
 import React from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
-import { getCsrfToken, signOut, useSession } from 'next-auth/client'
+import { getCsrfToken } from 'next-auth/client'
 
 import Fields from './Fields'
 import { useUsername } from '../../../../context/username'

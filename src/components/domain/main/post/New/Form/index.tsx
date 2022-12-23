@@ -4,7 +4,6 @@ import { SubmitHandler, useFormContext, useWatch } from 'react-hook-form'
 import withReactContent from 'sweetalert2-react-content'
 import { api } from '../../../../../../../service/api'
 import Swal from 'sweetalert2'
-import { useSession } from 'next-auth/client'
 import { useUsername } from '../../../../../../context/username'
 
 export interface INewPostFormInput {

@@ -1,4 +1,4 @@
-import { signOut, useSession } from 'next-auth/client'
+import { useSession } from 'next-auth/client'
 import React, {
   createContext,
   useState,

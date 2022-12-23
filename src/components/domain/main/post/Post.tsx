@@ -11,9 +11,7 @@ import { diffTime } from '../../../../assets/scripts/utils/diffTime'
 import trash from '../../../../assets/images/trash.svg'
 import edit from '../../../../assets/images/edit.svg'
 import { api } from '../../../../../service/api'
-import { useSession } from 'next-auth/client'
 import { useUsername } from '../../../../context/username'
-import { useRouter } from 'next/router'
 
 export interface IPost {
   id: number

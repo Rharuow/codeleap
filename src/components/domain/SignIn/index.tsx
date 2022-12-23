@@ -1,5 +1,5 @@
-import { signOut, useSession } from 'next-auth/client'
-import React, { useEffect } from 'react'
+import React from 'react'
+import { useSession } from 'next-auth/client'
 import Form from './Form'
 
 const SignIn = () => {
