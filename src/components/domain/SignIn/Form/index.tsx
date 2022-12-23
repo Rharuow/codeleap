@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
-import { getCsrfToken } from 'next-auth/client'
+import { getCsrfToken, signOut, useSession } from 'next-auth/client'
 
 import Fields from './Fields'
-import { nextAuth } from '../../../../../service/api'
+import { useUsername } from '../../../../context/username'
 import { useRouter } from 'next/router'
+import { nextAuth } from '../../../../../service/api'
 
 export interface ISignInFormInput {
   username: string
@@ -14,6 +15,8 @@ const Form = () => {
   const methods = useForm<ISignInFormInput>()
 
   const router = useRouter()
+
+  const { setUsername } = useUsername()
 
   const onSubmit: SubmitHandler<ISignInFormInput> = async data => {
     const csrfToken = await getCsrfToken()
@@ -25,11 +28,11 @@ const Form = () => {
         callbackUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/main`
       })
       .then(response => {
+        setUsername(data.username)
         router.push('/main')
       })
       .catch(error => {
-        console.log('error = ', error)
-        // router.push('/main')
+        console.log(error)
       })
   }
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 
 import Header from '../../components/domain/main/Header'
@@ -6,17 +6,17 @@ import Body from '../../components/domain/main/Body'
 
 import { api } from '../../../service/api'
 import Loading from '../../components/Loading'
+import { useUsername } from '../../context/username'
+import { useSession } from 'next-auth/client'
+import { useRouter } from 'next/router'
 
-const index: React.FC = () => {
-  const [posts, setPosts] = useState([])
-  const [loading, setLoading] = useState(true)
+const MainPage: React.FC = () => {
+  const { loading } = useUsername()
 
-  useEffect(() => {
-    api.get('/').then(res => {
-      setPosts(res.data.results)
-      setLoading(false)
-    })
-  }, [])
+  const [session] = useSession()
+
+  console.log('session = ', session)
+
   return (
     <div className="w-100">
       {loading ? (
@@ -30,7 +30,7 @@ const index: React.FC = () => {
           </Row>
           <Row>
             <Col>
-              <Body posts={posts} setPosts={setPosts} />
+              <Body />
             </Col>
           </Row>
         </Container>
@@ -39,4 +39,4 @@ const index: React.FC = () => {
   )
 }
 
-export default index
+export default MainPage

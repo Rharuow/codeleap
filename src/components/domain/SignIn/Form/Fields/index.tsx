@@ -9,8 +9,6 @@ const Fields = () => {
 
   const usernameWatch = useWatch({ name: 'username', control })
 
-  console.log('usernameWatch = ', !usernameWatch)
-
   return (
     <div className="form-group">
       <label htmlFor="username" className="fs-1rem mb-13px">

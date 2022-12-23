@@ -1,7 +1,12 @@
-import React from 'react'
+import { signOut, useSession } from 'next-auth/client'
+import React, { useEffect } from 'react'
 import Form from './Form'
 
 const SignIn = () => {
+  const [session] = useSession()
+
+  console.log(session)
+
   return (
     <div className="bg-secondary vh-100 w-100 d-flex justify-content-center align-items-center">
       <div className="card px-32px py-28px rounded-0 w-500px border">

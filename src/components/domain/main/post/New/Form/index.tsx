@@ -5,6 +5,7 @@ import withReactContent from 'sweetalert2-react-content'
 import { api } from '../../../../../../../service/api'
 import Swal from 'sweetalert2'
 import { useSession } from 'next-auth/client'
+import { useUsername } from '../../../../../../context/username'
 
 export interface INewPostFormInput {
   title: string
@@ -28,12 +29,12 @@ const NewPostForm: React.FC<{
 
   const MySwal = withReactContent(Swal)
 
-  const [session] = useSession()
+  const { username } = useUsername()
 
   const onSubmit: SubmitHandler<INewPostFormInput> = ({ title, content }) => {
     api
       .post('/', {
-        username: session?.user?.name,
+        username,
         title,
         content
       })

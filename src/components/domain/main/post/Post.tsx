@@ -7,13 +7,15 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import { diffTime } from '../../../../assets/scripts/utils/diffTime'
-import { useUsername } from '../../../../context/username'
 
 import trash from '../../../../assets/images/trash.svg'
 import edit from '../../../../assets/images/edit.svg'
 import { api } from '../../../../../service/api'
+import { useSession } from 'next-auth/client'
+import { useUsername } from '../../../../context/username'
+import { useRouter } from 'next/router'
 
-interface IPost {
+export interface IPost {
   id: number
   username: string
   created_datetime: Date
@@ -21,7 +23,7 @@ interface IPost {
   content: string
 }
 
-interface IFormInput {
+export interface IFormInput {
   post_title: string
   post_content: string
 }
@@ -35,7 +37,6 @@ const Post: React.FC<{
   post: IPost
   setPosts: React.Dispatch<React.SetStateAction<never[]>>
 }> = ({ post, setPosts }) => {
-  const { username } = useUsername()
   const [show, setShow] = useState(false)
   const [showEdit, setShowEdit] = useState(false)
   const [showDelete, setShowDelete] = useState(false)
@@ -117,6 +118,8 @@ const Post: React.FC<{
       </div>
     </>
   )
+
+  const { username } = useUsername()
 
   const { handleSubmit } = useForm()
 
