@@ -15,8 +15,6 @@ const MainPage: React.FC = () => {
 
   const [session] = useSession()
 
-  console.log('session = ', session)
-
   return (
     <div className="w-100">
       {loading ? (

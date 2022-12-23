@@ -36,7 +36,6 @@ const Body: React.FC = () => {
   return (
     <PostContext.Provider value={{ posts, setPosts }}>
       <div className="w-100 px-39px py-23px">
-        {username}
         <NewPost setPosts={setPosts} />
         {posts.map((post, index) => (
           <Post key={index} post={post} setPosts={setPosts} />
